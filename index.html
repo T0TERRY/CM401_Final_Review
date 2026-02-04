@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication Skills - Exam Prep</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #4f46e5;
+            --accent-hover: #4338ca;
+            --border: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --danger: #ef4444;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            z-index: 1000;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            min-width: 48px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: white;
+            padding: 2rem 1rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            opacity: 0.95;
+        }
+
+        /* Exam Spec Card */
+        .exam-spec {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .exam-spec h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spec-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .spec-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .tab-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn:active {
+            transform: scale(0.95);
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .icon-ch1 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .icon-ch2 { background: linear-gradient(135deg, #10b981, #059669); }
+        .icon-ch3 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .icon-ch4 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .icon-ch5 { background: linear-gradient(135deg, #ec4899, #db2777); }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Key Terms */
+        .term-card {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .term-word {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+
+        .term-definition {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Questions */
+        .question-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .option {
+            background: var(--bg-secondary);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .option.selected {
+            border-color: var(--accent);
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .option.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .option.incorrect {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        /* Answer Section */
+        .answer-section {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .answer-section.show {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .answer-label {
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            min-height: 48px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            transition: width 0.5s ease;
+        }
+
+        /* Study Tips */
+        .tip-card {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Case Study */
+        .case-study {
+            background: var(--bg-card);
+            border-left: 4px solid var(--info);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .case-label {
+            display: inline-block;
+            background: var(--info);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Text Area */
+        .text-area {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .text-area:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Score Card */
+        .score-card {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+        }
+
+        /* Search */
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            min-height: 48px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--accent);
+            color: white;
+            margin-left: 0.5rem;
+        }
+
+        .badge-success { background: var(--success); }
+        .badge-warning { background: var(--warning); }
+        .badge-info { background: var(--info); }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <span>📚</span>
+                <span>CM401 Exam Prep</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero -->
+        <div class="hero">
+            <h1>Communication Skills Exam</h1>
+            <p>Complete preparation for CM401 - Chapters 1-5</p>
+        </div>
+
+        <!-- Exam Specification -->
+        <div class="exam-spec">
+            <h3>📋 Exam Specification</h3>
+            <div class="spec-item">
+                <strong>Key Terms (5 items)</strong> - Chapters 1, 2, 3, 4, 5
+            </div>
+            <div class="spec-item">
+                <strong>A. Multiple-Choice (10 items)</strong> - All Chapters
+            </div>
+            <div class="spec-item">
+                <strong>B. Short-Answer (3 items)</strong> - Chapters 1, 2, 3
+            </div>
+            <div class="spec-item">
+                <strong>Application Questions:</strong><br>
+                • 1 Case Study (Chapter 1)<br>
+                • 1 Scenario (Chapter 3)
+            </div>
+        </div>
+
+        <!-- Study Progress -->
+        <div class="progress-container">
+            <div class="progress-header">
+                <span>Study Progress</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" data-tab="overview">📊 Overview</button>
+            <button class="tab-btn" data-tab="keyterms">📖 Key Terms</button>
+            <button class="tab-btn" data-tab="mcq">✅ MCQ Practice</button>
+            <button class="tab-btn" data-tab="shortanswer">✍️ Short Answer</button>
+            <button class="tab-btn" data-tab="casestudy">📚 Case Studies</button>
+            <button class="tab-btn" data-tab="tips">💡 Study Tips</button>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="content-section active" id="overview">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Chapters</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">67</div>
+                    <div class="stat-label">Key Terms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">MCQ Questions</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch1">💬</div>
+                    <div>
+                        <div class="card-title">Chapter 1: Communication Practices</div>
+                        <div class="card-subtitle">21 key terms</div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Two-way process • Sender-Receiver-Feedback • Verbal & Non-Verbal • Barriers • Active Listening
+                </p>
+                <button class="btn" onclick="showTab('keyterms')">Review Key Terms</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch2">🎤</div>
+                    <div>
+                        <div class="card-title">Chapter 2: Presentations & Speeches</div>
+                        <div class="card-subtitle">15 key terms</div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Structure (Intro-Body-Conclusion) • Delivery Skills • Visual Aids • PREP Formula • ABC Packaging
+                </p>
+                <button class="btn" onclick="showTab('keyterms')">Review Key Terms</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch3">🤝</div>
+                    <div>
+                        <div class="card-title">Chapter 3: Negotiation & Conflict</div>
+                        <div class="card-subtitle">20 key terms</div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Win-Win Strategy • Conflict Levels • Emotional Intelligence • Power Types • Conflict Map
+                </p>
+                <button class="btn" onclick="showTab('keyterms')">Review Key Terms</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch4">👥</div>
+                    <div>
+                        <div class="card-title">Chapter 4: Team Effectiveness</div>
+                        <div class="card-subtitle">12 key terms</div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Cohesion • Social Loafing • Groupthink • Task Roles • Stakeholder • Transparency
+                </p>
+                <button class="btn" onclick="showTab('keyterms')">Review Key Terms</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch5">⭐</div>
+                    <div>
+                        <div class="card-title">Chapter 5: Leadership & Development</div>
+                        <div class="card-subtitle">14 key terms</div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Transactional vs Transformational • RADAR Approach • Power Types • Coaching • Self-Awareness
+                </p>
+                <button class="btn" onclick="showTab('keyterms')">Review Key Terms</button>
+            </div>
+        </div>
+
+        <!-- Key Terms Section -->
+        <div class="content-section" id="keyterms">
+            <input type="text" class="search-box" id="termSearch" placeholder="🔍 Search key terms...">
+
+            <h2 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span>📖</span> All Key Terms by Chapter
+            </h2>
+
+            <!-- Chapter 1 Terms -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch1">1️⃣</div>
+                    <div>
+                        <div class="card-title">Chapter 1: Communication Practices</div>
+                        <div class="card-subtitle">21 essential terms</div>
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Enculturation</div>
+                    <div class="term-definition">The process of learning and adopting the values, beliefs, and communication styles of one's own culture.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Ethnocentrism</div>
+                    <div class="term-definition">Believing one's own culture or way of communicating is better than others.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Multicultural Society</div>
+                    <div class="term-definition">A community where people from many cultural backgrounds live and communicate together.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Globalization</div>
+                    <div class="term-definition">The increasing connection of people and cultures around the world through communication, trade, and technology.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Horizontal Channel</div>
+                    <div class="term-definition">Communication that happens between people at the same level in an organization (e.g., coworkers sharing ideas).</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Intellectual Capital</div>
+                    <div class="term-definition">The knowledge, skills, and ideas that people share in communication to create value.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Perception</div>
+                    <div class="term-definition">How people interpret and understand messages based on their own experiences and background.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Conflict of Interest</div>
+                    <div class="term-definition">A situation where personal interests may interfere with fair and honest communication or decision-making.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Channel Richness</div>
+                    <div class="term-definition">How well a communication method (like face-to-face, email, or video call) can carry details, emotions, and understanding.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Communication Barriers</div>
+                    <div class="term-definition">Obstacles (like language, noise, or misunderstanding) that block clear communication.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Context</div>
+                    <div class="term-definition">The situation, environment, or background that gives meaning to communication.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Discrimination</div>
+                    <div class="term-definition">Unfair treatment or negative communication toward someone because of their background or identity.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Cultural Sensitivity</div>
+                    <div class="term-definition">Being aware of and respectful toward differences in communication styles among cultures.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Ethics</div>
+                    <div class="term-definition">Principles of right and wrong that guide respectful and honest communication.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Knowledge Communication</div>
+                    <div class="term-definition">The sharing of information, skills, and expertise in a way others can understand and use.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Persuasion</div>
+                    <div class="term-definition">The process of influencing someone's beliefs, attitudes, or actions through communication.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Sustainability</div>
+                    <div class="term-definition">Communicating and acting in ways that support long-term balance between people, society, and the environment.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Diversity</div>
+                    <div class="term-definition">The presence of different cultural, social, or personal backgrounds that affect communication styles.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Persuade</div>
+                    <div class="term-definition">To convince someone to believe or do something through communication.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Implement</div>
+                    <div class="term-definition">To put communication plans or strategies into action.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Inclusive Communication Techniques</div>
+                    <div class="term-definition">Ways of communicating that make everyone feel respected and included, regardless of their differences.</div>
+                </div>
+            </div>
+
+            <!-- Chapter 2 Terms -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch2">2️⃣</div>
+                    <div>
+                        <div class="card-title">Chapter 2: Presentations & Speeches</div>
+                        <div class="card-subtitle">15 essential terms</div>
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Prepared Speech</div>
+                    <div class="term-definition">A planned and organized speech delivered from notes.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Impromptu Speech</div>
+                    <div class="term-definition">A spontaneous, unprepared speech given on the spot.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Manuscript Speech</div>
+                    <div class="term-definition">A formal presentation read from a written script.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Briefing</div>
+                    <div class="term-definition">A short oral summary or report of an event, plan, or operation.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Podcast</div>
+                    <div class="term-definition">An audio recording that can be accessed online for on-demand listening.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Thoughtline</div>
+                    <div class="term-definition">The connecting theme or central idea that links all parts of a presentation.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">PREP Formula</div>
+                    <div class="term-definition">A structure for impromptu speaking: Point, Reason, Example, Point.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Nonverbal Communication</div>
+                    <div class="term-definition">The use of facial expressions, gestures, posture, and appearance to convey meaning.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Stage Fright</div>
+                    <div class="term-definition">The nervousness or anxiety experienced before or during public speaking.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Constructive Feedback</div>
+                    <div class="term-definition">Helpful comments that guide improvement in performance.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Audience Analysis</div>
+                    <div class="term-definition">The process of understanding the audience's needs, interests, and expectations.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Visual Aids</div>
+                    <div class="term-definition">Slides, charts, or graphics used to enhance audience understanding.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Ethical Speaking</div>
+                    <div class="term-definition">Delivering honest, respectful, and accurate messages.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Co-presentation</div>
+                    <div class="term-definition">A collaborative speech given by multiple speakers in a coordinated manner.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">ABC Packaging Technique</div>
+                    <div class="term-definition">Structure for an effective presentation: Attention, Body, Conclusion.</div>
+                </div>
+            </div>
+
+            <!-- Chapter 3 Terms -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch3">3️⃣</div>
+                    <div>
+                        <div class="card-title">Chapter 3: Negotiation & Conflict</div>
+                        <div class="card-subtitle">20 essential terms</div>
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Negotiation</div>
+                    <div class="term-definition">A process in which two or more parties discuss issues to resolve differences and reach an agreement.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Win–Win Strategy</div>
+                    <div class="term-definition">A negotiation approach where both parties' needs are met and both benefit from the outcome.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Win–Lose Strategy</div>
+                    <div class="term-definition">A negotiation strategy where one party gains an advantage at the expense of the other.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Lose–Win Strategy</div>
+                    <div class="term-definition">A situation where one party makes too many concessions and the other benefits.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Lose–Lose Strategy</div>
+                    <div class="term-definition">Both parties fail to reach agreement and walk away dissatisfied.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Compromise</div>
+                    <div class="term-definition">A negotiation option where each party gives up something to reach a middle-ground solution.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Collaboration</div>
+                    <div class="term-definition">A cooperative approach where both parties work together to find a solution that satisfies both.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Competition</div>
+                    <div class="term-definition">A strategy where one party tries to dominate or win over the other.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Accommodation</div>
+                    <div class="term-definition">When one party gives in to the other's needs, often resulting in a win–lose outcome.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Withdrawal (Avoidance)</div>
+                    <div class="term-definition">When one party backs away from negotiation, resulting in no solution and dissatisfaction.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Personal Negotiation Styles</div>
+                    <div class="term-definition">Patterns of behavior that influence how individuals communicate and manage conflict.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Emotional Intelligence (EI)</div>
+                    <div class="term-definition">The ability to recognize, understand, and manage your own emotions and the emotions of others during negotiation.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Active Listening</div>
+                    <div class="term-definition">A communication skill that involves fully concentrating, understanding, and responding to the speaker.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Power in Negotiation</div>
+                    <div class="term-definition">The ability of one party to influence another based on position, resources, expertise, or relationships.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Legitimate Power</div>
+                    <div class="term-definition">Authority based on a person's official position in an organization.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Expertise Power</div>
+                    <div class="term-definition">Influence gained from special skills, knowledge, or experience.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Conflict</div>
+                    <div class="term-definition">A disagreement or clash between individuals or groups due to differences in needs, values, goals, or perceptions.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Levels of Conflict</div>
+                    <div class="term-definition">The stages conflict moves through: discomfort, incident, misunderstanding, tension, and crisis.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Assertive Communication</div>
+                    <div class="term-definition">Expressing needs and feelings clearly, honestly, and respectfully without violating others' rights.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Conflict Map</div>
+                    <div class="term-definition">A visual tool that outlines the issue, people involved, and their needs/concerns to help identify solutions.</div>
+                </div>
+            </div>
+
+            <!-- Chapter 4 Terms -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch4">4️⃣</div>
+                    <div>
+                        <div class="card-title">Chapter 4: Team Effectiveness</div>
+                        <div class="card-subtitle">12 essential terms</div>
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Cohesion</div>
+                    <div class="term-definition">The degree to which group members stick together, support each other, and feel united as a team.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Millennials</div>
+                    <div class="term-definition">People born roughly between 1981 and 1996, often associated with growing up during the rise of the internet and digital technology.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Social Loafing</div>
+                    <div class="term-definition">When a person puts in less effort while working in a group than they would when working alone.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Task-Related Role</div>
+                    <div class="term-definition">A role in a team that focuses on completing the work, such as planning, organizing, or giving information.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Work-Team Enabler</div>
+                    <div class="term-definition">A person who helps the team work smoothly by supporting communication, cooperation, and problem-solving.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Liaise</div>
+                    <div class="term-definition">To communicate and work with others to share information and coordinate activities.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Stakeholder</div>
+                    <div class="term-definition">A person or group who has an interest in or is affected by a project, decision, or organization.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Transparency</div>
+                    <div class="term-definition">The practice of being open, honest, and clear about actions, decisions, and information.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Accountability</div>
+                    <div class="term-definition">The responsibility to take ownership of your actions and accept the results or consequences.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Grapevine Communication</div>
+                    <div class="term-definition">Informal and unofficial communication that spreads through rumors, chats, or personal conversations in an organization.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Groupthink</div>
+                    <div class="term-definition">A situation where a group avoids disagreement and critical thinking in order to maintain harmony, often leading to poor decisions.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Adjourning</div>
+                    <div class="term-definition">The final stage of a team, when the group completes its work and members separate.</div>
+                </div>
+            </div>
+
+            <!-- Chapter 5 Terms -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-ch5">5️⃣</div>
+                    <div>
+                        <div class="card-title">Chapter 5: Leadership & Development</div>
+                        <div class="card-subtitle">14 essential terms</div>
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Transactional Leader</div>
+                    <div class="term-definition">A leader who focuses on tasks, rules, and performance, using rewards and penalties to motivate people.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Transformational Leader</div>
+                    <div class="term-definition">A leader who inspires and motivates team members to achieve more than expected by creating a shared vision and encouraging personal growth.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Performance Criteria</div>
+                    <div class="term-definition">The standards or measures used to judge how well a person or team has completed a task or achieved a goal.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Authentic Leader</div>
+                    <div class="term-definition">A leader who is genuine, honest, and consistent, and leads based on strong values and self-awareness.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Principles of Assessment</div>
+                    <div class="term-definition">The basic rules for fair and effective evaluation, such as fairness, validity, reliability, transparency, and consistency.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Coach</div>
+                    <div class="term-definition">A person who guides, supports, and trains others to improve their skills, confidence, and performance.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">RADAR Five-Step Approach</div>
+                    <div class="term-definition">A problem-solving method: Request identification, Ask for details, Develop ideas, Agree on actions, Review and follow-up.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Task-Related Function</div>
+                    <div class="term-definition">Activities that focus on completing the work, such as planning, organizing, giving instructions, and solving problems.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Maintenance-Related Function</div>
+                    <div class="term-definition">Activities that focus on team relationships and morale, such as encouraging, supporting, and resolving conflicts.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Legitimate Power</div>
+                    <div class="term-definition">Power that comes from a person's official position or role, such as a manager or teacher.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Coercive Power</div>
+                    <div class="term-definition">Power based on the ability to punish or apply negative consequences.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Expert Power</div>
+                    <div class="term-definition">Power that comes from special knowledge, skills, or experience.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Reward Power</div>
+                    <div class="term-definition">Power based on the ability to give rewards, such as praise, grades, promotions, or bonuses.</div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-word">Self-Awareness</div>
+                    <div class="term-definition">The ability to understand your own emotions, strengths, weaknesses, and behavior, and how they affect others.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MCQ Practice Section -->
+        <div class="content-section" id="mcq">
+            <h2 style="margin-bottom: 1.5rem;">✅ Multiple Choice Questions</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Practice all chapters. Click an option to select, then check your answer!
+            </p>
+
+            <div class="question-card" data-answer="b">
+                <span class="question-number">Question 1</span>
+                <div class="question-text">
+                    What is the correct order of the communication process?
+                </div>
+                <div class="option" data-value="a">A) Receiver → Message → Sender → Feedback → Channel</div>
+                <div class="option" data-value="b">B) Sender → Message → Channel → Receiver → Feedback</div>
+                <div class="option" data-value="c">C) Channel → Sender → Message → Feedback → Receiver</div>
+                <div class="option" data-value="d">D) Message → Sender → Channel → Receiver → Feedback</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>B) Sender → Message → Channel → Receiver → Feedback</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        The communication process flows from sender who creates the message, sends it through a channel to the receiver, who then provides feedback.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="c">
+                <span class="question-number">Question 2</span>
+                <div class="question-text">
+                    Which of the following is an example of non-verbal communication?
+                </div>
+                <div class="option" data-value="a">A) Sending an email</div>
+                <div class="option" data-value="b">B) Making a phone call</div>
+                <div class="option" data-value="c">C) Making eye contact and smiling</div>
+                <div class="option" data-value="d">D) Writing a report</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>C) Making eye contact and smiling</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Non-verbal communication includes body language, facial expressions, gestures, and tone of voice.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="a">
+                <span class="question-number">Question 3</span>
+                <div class="question-text">
+                    What does the PREP formula stand for in impromptu speaking?
+                </div>
+                <div class="option" data-value="a">A) Point, Reason, Example, Point</div>
+                <div class="option" data-value="b">B) Prepare, Research, Execute, Present</div>
+                <div class="option" data-value="c">C) Plan, Review, Edit, Practice</div>
+                <div class="option" data-value="d">D) Practice, Rehearse, Evaluate, Perform</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>A) Point, Reason, Example, Point</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        PREP is a structure for impromptu speaking: make your Point, give a Reason, provide an Example, and restate your Point.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="b">
+                <span class="question-number">Question 4</span>
+                <div class="question-text">
+                    Which negotiation strategy results in both parties being satisfied?
+                </div>
+                <div class="option" data-value="a">A) Win-Lose</div>
+                <div class="option" data-value="b">B) Win-Win</div>
+                <div class="option" data-value="c">C) Lose-Lose</div>
+                <div class="option" data-value="d">D) Competition</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>B) Win-Win</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Win-Win strategy means both parties' needs are met and both benefit from the outcome.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="c">
+                <span class="question-number">Question 5</span>
+                <div class="question-text">
+                    What are the five levels of conflict in order?
+                </div>
+                <div class="option" data-value="a">A) Crisis, Tension, Misunderstanding, Incident, Discomfort</div>
+                <div class="option" data-value="b">B) Incident, Discomfort, Tension, Crisis, Misunderstanding</div>
+                <div class="option" data-value="c">C) Discomfort, Incident, Misunderstanding, Tension, Crisis</div>
+                <div class="option" data-value="d">D) Misunderstanding, Incident, Discomfort, Tension, Crisis</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>C) Discomfort, Incident, Misunderstanding, Tension, Crisis</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Conflict escalates from minor discomfort through various stages to a full crisis if not addressed early.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="b">
+                <span class="question-number">Question 6</span>
+                <div class="question-text">
+                    What is "social loafing" in team dynamics?
+                </div>
+                <div class="option" data-value="a">A) When team members work harder together than alone</div>
+                <div class="option" data-value="b">B) When a person puts in less effort in a group than working alone</div>
+                <div class="option" data-value="c">C) When team members take frequent breaks</div>
+                <div class="option" data-value="d">D) When teams work on social media projects</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>B) When a person puts in less effort in a group than working alone</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Social loafing is a common team problem where individuals reduce their effort when working in groups.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="d">
+                <span class="question-number">Question 7</span>
+                <div class="question-text">
+                    Which leadership style focuses on inspiring and motivating team members with a shared vision?
+                </div>
+                <div class="option" data-value="a">A) Transactional Leader</div>
+                <div class="option" data-value="b">B) Coercive Leader</div>
+                <div class="option" data-value="c">C) Autocratic Leader</div>
+                <div class="option" data-value="d">D) Transformational Leader</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>D) Transformational Leader</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Transformational leaders inspire and motivate team members to achieve more than expected by creating a shared vision and encouraging personal growth.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="a">
+                <span class="question-number">Question 8</span>
+                <div class="question-text">
+                    What does the "R" in RADAR approach stand for?
+                </div>
+                <div class="option" data-value="a">A) Request identification of the problem</div>
+                <div class="option" data-value="b">B) Respond to all questions</div>
+                <div class="option" data-value="c">C) Review previous decisions</div>
+                <div class="option" data-value="d">D) Reject inappropriate solutions</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>A) Request identification of the problem</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        RADAR: Request identification, Ask for details, Develop ideas, Agree on actions, Review and follow-up.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="c">
+                <span class="question-number">Question 9</span>
+                <div class="question-text">
+                    What is "groupthink" in team decision-making?
+                </div>
+                <div class="option" data-value="a">A) When a team thinks creatively together</div>
+                <div class="option" data-value="b">B) When team members brainstorm ideas</div>
+                <div class="option" data-value="c">C) When a group avoids disagreement to maintain harmony, leading to poor decisions</div>
+                <div class="option" data-value="d">D) When the group thinks about social activities</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>C) When a group avoids disagreement to maintain harmony, leading to poor decisions</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Groupthink happens when desire for harmony prevents critical thinking and results in poor decisions.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div class="question-card" data-answer="b">
+                <span class="question-number">Question 10</span>
+                <div class="question-text">
+                    Which power type comes from special knowledge, skills, or experience?
+                </div>
+                <div class="option" data-value="a">A) Legitimate Power</div>
+                <div class="option" data-value="b">B) Expert Power</div>
+                <div class="option" data-value="c">C) Reward Power</div>
+                <div class="option" data-value="d">D) Coercive Power</div>
+                <div class="answer-section">
+                    <div class="answer-label">✓ Correct Answer</div>
+                    <strong>B) Expert Power</strong>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Expert power is influence gained from special skills, knowledge, or experience that others value.
+                    </p>
+                </div>
+                <button class="btn" onclick="checkAnswer(this)">Check Answer</button>
+            </div>
+
+            <div id="mcqScore"></div>
+        </div>
+
+        <!-- Short Answer Section -->
+        <div class="content-section" id="shortanswer">
+            <h2 style="margin-bottom: 1.5rem;">✍️ Short Answer Questions</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Practice for Chapters 1, 2, and 3. Answer in bullet points or short paragraphs.
+            </p>
+
+            <div class="question-card">
+                <span class="question-number">Chapter 1</span>
+                <div class="question-text">
+                    Explain the communication process and identify the five main components.
+                </div>
+                <textarea class="text-area" placeholder="Write your answer here..."></textarea>
+                <div class="answer-section show">
+                    <div class="answer-label">💡 Sample Answer</div>
+                    <p style="color: var(--text-secondary);">
+                        <strong>The communication process is a two-way exchange involving five components:</strong><br>
+                        • <strong>Sender:</strong> Person with the idea/message<br>
+                        • <strong>Message:</strong> Information being shared<br>
+                        • <strong>Channel:</strong> Method of transmission (speech, email, etc.)<br>
+                        • <strong>Receiver:</strong> Person who gets the message<br>
+                        • <strong>Feedback:</strong> Response showing understanding<br><br>
+                        <em>Example: Teacher explains homework (sender/message) → students listen (receiver) → ask questions (feedback).</em>
+                    </p>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <span class="question-number">Chapter 2</span>
+                <div class="question-text">
+                    What are the three main parts of a presentation structure? Explain the purpose of each part.
+                </div>
+                <textarea class="text-area" placeholder="Write your answer here..."></textarea>
+                <div class="answer-section show">
+                    <div class="answer-label">💡 Sample Answer</div>
+                    <p style="color: var(--text-secondary);">
+                        <strong>Three main parts of presentation structure:</strong><br><br>
+                        <strong>1. Introduction:</strong><br>
+                        • Gets audience attention<br>
+                        • States the purpose<br>
+                        • Techniques: ask question, tell story, share fact<br><br>
+                        <strong>2. Body:</strong><br>
+                        • Presents 3-4 main points<br>
+                        • Supports with examples, facts, experiences<br>
+                        • Develops the topic in detail<br><br>
+                        <strong>3. Conclusion:</strong><br>
+                        • Summarizes key points<br>
+                        • Leaves strong final message<br>
+                        • Reinforces main ideas
+                    </p>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <span class="question-number">Chapter 3</span>
+                <div class="question-text">
+                    Compare and contrast Win-Win and Win-Lose negotiation strategies. Provide an example of each.
+                </div>
+                <textarea class="text-area" placeholder="Write your answer here..."></textarea>
+                <div class="answer-section show">
+                    <div class="answer-label">💡 Sample Answer</div>
+                    <p style="color: var(--text-secondary);">
+                        <strong>Win-Win Strategy:</strong><br>
+                        • Both parties' needs are met<br>
+                        • Both benefit from outcome<br>
+                        • Collaborative approach<br>
+                        • Maintains good relationships<br>
+                        <em>Example: Two students want same computer → agree to take turns based on who has urgent deadline.</em><br><br>
+                        <strong>Win-Lose Strategy:</strong><br>
+                        • One party gains advantage<br>
+                        • Other party loses or is disadvantaged<br>
+                        • Competitive approach<br>
+                        • May damage relationships<br>
+                        <em>Example: One person chooses all tasks in group project, others feel unhappy and excluded.</em><br><br>
+                        <strong>Key Difference:</strong> Win-Win seeks mutual benefit and cooperation, while Win-Lose is competitive with one winner.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study Section -->
+        <div class="content-section" id="casestudy">
+            <h2 style="margin-bottom: 1.5rem;">📚 Application Questions</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Write answers in well-developed paragraphs.
+            </p>
+
+            <!-- Case Study from Chapter 1 -->
+            <div class="case-study">
+                <span class="case-label">CASE STUDY - CHAPTER 1</span>
+                <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Classroom Miscommunication</h3>
+                
+                <p style="margin-bottom: 1rem;">
+                    <strong>Situation:</strong><br>
+                    A teacher gives instructions for a group project. Some students submit posters, while others submit PowerPoint slides. The class is confused about what was required.
+                </p>
+
+                <p style="margin-bottom: 1rem;">
+                    <strong>Problem:</strong><br>
+                    The message was not clear, and students did not give feedback to confirm understanding.
+                </p>
+
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <strong>Question:</strong><br>
+                    Analyze this situation using the communication process model. Identify what went wrong and propose solutions to prevent this miscommunication. Your answer should address the five components of communication and suggest specific improvements.
+                </div>
+
+                <textarea class="text-area" placeholder="Write your answer here (well-developed paragraph)..."></textarea>
+
+                <div class="answer-section show">
+                    <div class="answer-label">💡 Sample Answer</div>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        This classroom miscommunication demonstrates breakdowns in multiple components of the communication process. First, the <strong>sender (teacher)</strong> did not deliver the message clearly enough, possibly using vague language. The <strong>message</strong> itself lacked specificity about the required format. The <strong>channel</strong> may have been inadequate—perhaps only verbal instructions without written confirmation. The <strong>receivers (students)</strong> did not fully process the message, as evidenced by different interpretations. Most critically, there was no <strong>feedback</strong> loop to verify understanding before students began work.
+                        <br><br>
+                        To prevent this, the teacher should: (1) Provide clear, written instructions alongside verbal explanation, (2) Show a sample of the expected deliverable, (3) Ask students to explain the task in their own words as feedback, (4) Create a checklist of requirements, and (5) Allow time for clarifying questions. Additionally, students should take responsibility by asking questions when unclear and confirming their understanding. This demonstrates that effective communication requires active participation from both sender and receiver, with feedback serving as the critical verification mechanism.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Scenario from Chapter 3 -->
+            <div class="case-study">
+                <span class="case-label">SCENARIO - CHAPTER 3</span>
+                <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Workplace Conflict Resolution</h3>
+                
+                <p style="margin-bottom: 1rem;">
+                    <strong>Scenario:</strong><br>
+                    You are a team leader at a marketing company. Two of your team members, Sarah and John, both want to take the same day off to attend important personal events. Sarah needs the day for her sister's wedding, and John needs it for his child's graduation ceremony. Both events are on the same date, and you need at least one person present to handle an important client presentation.
+                </p>
+
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <strong>Question:</strong><br>
+                    Using your knowledge of negotiation strategies, conflict management, and emotional intelligence, explain how you would resolve this conflict. Your answer should include: (1) the negotiation strategy you would use, (2) how you would apply emotional intelligence, (3) the steps you would take using a conflict map, and (4) the expected outcome.
+                </div>
+
+                <textarea class="text-area" placeholder="Write your answer here (well-developed paragraph)..."></textarea>
+
+                <div class="answer-section show">
+                    <div class="answer-label">💡 Sample Answer</div>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        To resolve this conflict, I would employ a <strong>Win-Win negotiation strategy</strong> combined with emotional intelligence and systematic conflict mapping. First, I would meet with both Sarah and John individually to understand their needs and demonstrate <strong>empathy</strong>—acknowledging that both events are personally significant. This shows emotional intelligence by recognizing and validating their feelings.
+                        <br><br>
+                        Using a <strong>conflict map</strong>, I would: (1) Identify the core issue (both need same day off, but coverage is required), (2) List stakeholders (Sarah, John, client, team), (3) Understand each person's needs (Sarah: attend wedding; John: attend graduation; Company: client presentation coverage), and (4) Explore possible solutions.
+                        <br><br>
+                        Through <strong>active listening</strong> and collaborative problem-solving, I would present several options: (a) Can the client presentation be rescheduled? (b) Can another team member cover? (c) Can one event be attended partially (come in late/leave early)? (d) Can they share the day by splitting coverage? After discussion, we might discover that Sarah's wedding is in the evening, allowing her to handle the morning presentation, while John covers afternoon follow-up remotely.
+                        <br><br>
+                        The <strong>expected outcome</strong> is a Win-Win solution where both attend their important events, client needs are met, and team relationships remain positive. By using <strong>assertive communication</strong>, showing empathy, and focusing on collaborative problem-solving rather than positional authority, I would maintain team morale while meeting business objectives. This approach demonstrates that conflict, when managed with emotional intelligence, can strengthen rather than damage professional relationships.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Study Tips Section -->
+        <div class="content-section" id="tips">
+            <h2 style="margin-bottom: 1.5rem;">💡 Exam Study Tips</h2>
+
+            <div class="tip-card">
+                <div class="tip-icon">🎯</div>
+                <div class="tip-title">Focus on Key Terms</div>
+                <p>The exam includes 5 key term definitions. Review all 67 terms multiple times. Use flashcards or the search function on the Key Terms tab.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">📝</div>
+                <div class="tip-title">Practice MCQs Daily</div>
+                <p>Do the 10 multiple choice questions repeatedly until you can explain why each answer is correct. Understanding the reasoning is more important than memorizing.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">✍️</div>
+                <div class="tip-title">Write Practice Answers</div>
+                <p>For short-answer questions (Chapters 1, 2, 3), practice writing in bullet points AND paragraph form. Time yourself to match exam conditions.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">📚</div>
+                <div class="tip-title">Master Case Studies</div>
+                <p>Study the case study from Chapter 1 and scenario from Chapter 3. Practice writing well-developed paragraphs that apply concepts systematically.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">🔄</div>
+                <div class="tip-title">Use the Communication Process</div>
+                <p>For Chapter 1 questions, always reference: Sender → Message → Channel → Receiver → Feedback. This framework helps organize answers.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">🎤</div>
+                <div class="tip-title">Remember Presentation Structure</div>
+                <p>For Chapter 2: ABC (Attention-Body-Conclusion) or PREP (Point-Reason-Example-Point). Know when to use each format.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">🤝</div>
+                <div class="tip-title">Understand Negotiation Strategies</div>
+                <p>Know the difference between Win-Win, Win-Lose, Lose-Win, and Lose-Lose. Be able to give examples of each from real situations.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">⚡</div>
+                <div class="tip-title">Quick Review Strategy</div>
+                <p>
+                    <strong>3 days before exam:</strong><br>
+                    Day 1: Review all key terms<br>
+                    Day 2: Practice MCQs and short answers<br>
+                    Day 3: Write practice paragraphs for case studies
+                </p>
+            </div>
+
+            <div class="card" style="margin-top: 2rem; border-left: 4px solid var(--warning);">
+                <h3 style="margin-bottom: 1rem;">⚠️ Common Mistakes to Avoid</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Confusing Win-Win with Compromise (they're different!)</li>
+                    <li>Mixing up Transactional and Transformational leadership</li>
+                    <li>Forgetting to include all 5 communication process components</li>
+                    <li>Not providing specific examples in application questions</li>
+                    <li>Writing too brief for "well-developed paragraph" questions</li>
+                    <li>Confusing Social Loafing with Groupthink</li>
+                    <li>Not explaining the RADAR steps in order</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top: 1rem; background: linear-gradient(135deg, var(--success), #059669); color: white;">
+                <h3 style="margin-bottom: 1rem;">✨ Final Exam Day Tips</h3>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li>Read each question carefully - note if it asks for bullet points or paragraphs</li>
+                    <li>Manage your time: allocate more time to application questions</li>
+                    <li>For case studies, use this structure: identify problem → analyze using concepts → propose solutions</li>
+                    <li>Always provide specific examples to support your points</li>
+                    <li>Review your answers if time permits</li>
+                    <li>Stay calm and confident - you've prepared well!</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Tab Navigation
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        function showTab(tabName) {
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-tab') === tabName) {
+                    btn.classList.add('active');
+                }
+            });
+
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === tabName) {
+                    section.classList.add('active');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.getAttribute('data-tab');
+                showTab(tab);
+            });
+        });
+
+        // MCQ Answer Checking
+        let mcqScore = 0;
+        let mcqTotal = 10;
+        let answeredQuestions = new Set();
+
+        function checkAnswer(button) {
+            const questionCard = button.closest('.question-card');
+            const correctAnswer = questionCard.getAttribute('data-answer');
+            const options = questionCard.querySelectorAll('.option');
+            const answerSection = questionCard.querySelector('.answer-section');
+            let selectedOption = null;
+
+            // Find selected option
+            options.forEach(option => {
+                if (option.classList.contains('selected')) {
+                    selectedOption = option;
+                }
+            });
+
+            if (!selectedOption) {
+                alert('Please select an answer first!');
+                return;
+            }
+
+            const selectedValue = selectedOption.getAttribute('data-value');
+            const questionId = Array.from(document.querySelectorAll('.question-card')).indexOf(questionCard);
+
+            // Show correct/incorrect
+            options.forEach(option => {
+                const value = option.getAttribute('data-value');
+                option.style.pointerEvents = 'none';
+                if (value === correctAnswer) {
+                    option.classList.add('correct');
+                } else if (option.classList.contains('selected')) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            // Update score
+            if (!answeredQuestions.has(questionId)) {
+                answeredQuestions.add(questionId);
+                if (selectedValue === correctAnswer) {
+                    mcqScore++;
+                }
+                updateMCQScore();
+            }
+
+            // Show answer explanation
+            answerSection.classList.add('show');
+            button.style.display = 'none';
+
+            // Update progress
+            updateProgress();
+        }
+
+        // Option selection
+        document.querySelectorAll('#mcq .option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionCard = this.closest('.question-card');
+                const options = questionCard.querySelectorAll('.option');
+                
+                // Check if already answered
+                if (this.style.pointerEvents === 'none') return;
+
+                options.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        function updateMCQScore() {
+            const scoreDiv = document.getElementById('mcqScore');
+            if (answeredQuestions.size === mcqTotal) {
+                const percentage = (mcqScore / mcqTotal * 100).toFixed(0);
+                scoreDiv.innerHTML = `
+                    <div class="score-card">
+                        <h2>Your Score</h2>
+                        <div class="score-number">${mcqScore}/${mcqTotal}</div>
+                        <p>${percentage}% Correct</p>
+                        <p style="margin-top: 1rem; opacity: 0.9;">
+                            ${percentage >= 80 ? '🎉 Excellent work!' : percentage >= 60 ? '👍 Good job! Review incorrect answers.' : '📚 Keep practicing!'}
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // Search Key Terms
+        const termSearch = document.getElementById('termSearch');
+        if (termSearch) {
+            termSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const termCards = document.querySelectorAll('.term-card');
+                
+                termCards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Progress Tracking
+        function updateProgress() {
+            const totalItems = 67 + 10 + 3 + 2; // terms + mcq + short + case
+            let completed = 0;
+
+            // Count viewed terms (simplified - count as complete)
+            if (localStorage.getItem('viewedTerms')) completed += 67;
+            
+            // Count answered MCQs
+            completed += answeredQuestions.size;
+
+            const percentage = Math.min(100, (completed / totalItems * 100).toFixed(0));
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressPercent').textContent = percentage + '%';
+
+            localStorage.setItem('studyProgress', percentage);
+        }
+
+        // Load saved progress
+        const savedProgress = localStorage.getItem('studyProgress');
+        if (savedProgress) {
+            document.getElementById('progressFill').style.width = savedProgress + '%';
+            document.getElementById('progressPercent').textContent = savedProgress + '%';
+        }
+
+        // Mark terms as viewed
+        if (document.getElementById('keyterms')) {
+            localStorage.setItem('viewedTerms', 'true');
+            updateProgress();
+        }
+
+        // Scroll to Top
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Touch feedback
+        document.querySelectorAll('.tab-btn, .btn, .theme-toggle').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
